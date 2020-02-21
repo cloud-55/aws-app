@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This template creates a S3 bucket
+
+Parameters:  
+  pS3BucketName:
+    Type: String
+    Default: rocket-s3-bucket
+
+Resources:
+  rS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Ref: pS3BucketName
