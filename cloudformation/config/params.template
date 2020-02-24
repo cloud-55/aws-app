@@ -1,6 +1,6 @@
 [
   {
     "ParameterKey": "pS3BucketName",
-    "ParameterValue": "#{S3_BUCKET_NAME}"
+    "ParameterValue": "S3_BUCKET_NAME"
   }
 ]

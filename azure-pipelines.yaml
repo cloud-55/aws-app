@@ -7,11 +7,12 @@ pool: 'Hosted Ubuntu 1604'
 container: rocket
 
 variables:
-  AWS_S3_BUCKET_NAME: 'my-bucket'
+  S3_BUCKET_NAME: 'my-bucket'
   AWS_CLOUDFORMATION_STACK_NAME: 'my-test-stack'
 
 steps:
 - script: |
-    rocket deploy-stack $(AWS_CLOUDFORMATION_STACK_NAME) --template-file cloudformation/s3-template.yaml --params-file cloudformation/config/s3-params.json
+    rocket build-cfn-params --template-file cloudformation/config/params.template
+    rocket deploy-stack $(AWS_CLOUDFORMATION_STACK_NAME) --template-file cloudformation/s3-template.yaml --params-file cloudformation/config/params.json
 
   displayName: 'Deploy cloudformation stack'
