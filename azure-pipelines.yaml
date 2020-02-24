@@ -1,18 +1,26 @@
+pool: Hosted Ubuntu 1604
+
 resources:
   containers:
   - container: rocket
-    image: 'cloud55/rocket:latest'
-
-pool: 'Hosted Ubuntu 1604'
-container: rocket
+    image: cloud55/rocket:latest
 
 variables:
-  S3_BUCKET_NAME: 'my-bucket'
-  AWS_CLOUDFORMATION_STACK_NAME: 'my-test-stack'
+  - group: AWS
+  - name: AWS_CLOUDFORMATION_STACK_NAME
+    value: my-app-stack
+  - name: APP_NAME
+    value: MY_APP
+
+container: rocket
 
 steps:
-- script: |
-    rocket build-cfn-params --template-file cloudformation/config/params.template
-    rocket deploy-stack $(AWS_CLOUDFORMATION_STACK_NAME) --template-file cloudformation/s3-template.yaml --params-file cloudformation/config/params.json
+  - script: |
+      rocket build-cfn-params --app-name $(APP_NAME) --template-file cloudformation/config/params.template
 
-  displayName: 'Deploy cloudformation stack'
+    displayName: Build cloudformation params.json
+
+  - script: |
+      rocket deploy-stack $(AWS_CLOUDFORMATION_STACK_NAME) --template-file cloudformation/s3-template.yaml --params-file cloudformation/config/params.json
+
+    displayName: Deploy cloudformation stack
