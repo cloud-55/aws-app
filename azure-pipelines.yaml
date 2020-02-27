@@ -18,18 +18,13 @@ steps:
 - task: RocketBuildAndDeploy@0
   inputs:
     awsCredentials: 'cloud55'
+- script: |
+    rocket build-cfn-params --app-name $(APP_NAME) --template-file cloudformation/config/params.template
 
+  displayName: Build cloudformation params.json
 
+- script: |
+    rocket deploy-stack $(AWS_CLOUDFORMATION_STACK_NAME) --template-file cloudformation/s3-template.yaml --params-file cloudformation/config/params.json
 
+  displayName: Deploy cloudformation stack
 
-
-# steps:
-#   - script: |
-#       rocket build-cfn-params --app-name $(APP_NAME) --template-file cloudformation/config/params.template
-
-#     displayName: Build cloudformation params.json
-
-#   - script: |
-#       rocket deploy-stack $(AWS_CLOUDFORMATION_STACK_NAME) --template-file cloudformation/s3-template.yaml --params-file cloudformation/config/params.json
-
-#     displayName: Deploy cloudformation stack
