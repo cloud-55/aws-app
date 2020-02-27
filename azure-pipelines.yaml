@@ -12,7 +12,7 @@ variables:
 steps:
 - task: RocketBuildAndDeploy@0
   inputs:
-    awsCredentials: 'cloud55-aws-account'
+    awsCredentials: 'cloud55'
 
 
 
