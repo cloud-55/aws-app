@@ -1,10 +1,5 @@
 pool: Hosted Ubuntu 1604
 
-resources:
-  containers:
-  - container: rocket
-    image: cloud55/rocket:latest
-
 variables:
   - group: AWS
   - name: AWS_CLOUDFORMATION_STACK_NAME
@@ -12,7 +7,7 @@ variables:
   - name: APP_NAME
     value: MY_APP
 
-container: rocket
+#container: rocket
 
 steps:
 - task: RocketBuildAndDeploy@0
