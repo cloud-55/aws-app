@@ -16,10 +16,8 @@ container: rocket
 
 steps:
 - task: RocketBuildAndDeploy@0
-  displayName: Build
-  timeoutInMinutes: 120
   inputs:
-    awsCredentials: cloud55-aws-account
+    awsCredentials: 'cloud55-aws-account'
 
 
 
