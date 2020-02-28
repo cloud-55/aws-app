@@ -11,6 +11,10 @@ variables:
     value: my-app-stack
   - name: APP_NAME
     value: MY_APP
+  - name: AWS_ACCESS_KEY_ID
+    value: $(AWS_ACCESS_KEY_ID)
+  - name: AWS_SECRET_KEY_ID
+    value: $(AWS_SECRET_KEY_ID)
 
 container: rocket
 
