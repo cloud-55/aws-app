@@ -4,6 +4,10 @@ resources:
   containers:
   - container: rocket
     image: cloud55/rocket:latest
+    env:
+      AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+      AWS_SECRET_KEY_ID: $(AWS_SECRET_KEY_ID)
+
 
 variables:
   - group: AWS
@@ -19,15 +23,9 @@ steps:
     rocket build-cfn-params --app-name $(APP_NAME) --template-file cloudformation/config/params.template
 
   displayName: Build cloudformation params.json
-  env:
-    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
-    AWS_SECRET_KEY_ID: $(AWS_SECRET_KEY_ID)
 
 - script: |
     rocket deploy-stack $(AWS_CLOUDFORMATION_STACK_NAME) --template-file cloudformation/s3-template.yaml --params-file cloudformation/config/params.json
 
   displayName: Deploy cloudformation stack
-  env:
-    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
-    AWS_SECRET_KEY_ID: $(AWS_SECRET_KEY_ID)
 
