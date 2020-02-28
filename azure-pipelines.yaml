@@ -11,10 +11,6 @@ variables:
     value: my-app-stack
   - name: APP_NAME
     value: MY_APP
-  - name: AWS_ACCESS_KEY_ID
-    value: $(AWS_ACCESS_KEY_ID)
-  - name: AWS_SECRET_KEY_ID
-    value: $(AWS_SECRET_KEY_ID)
 
 container: rocket
 
@@ -23,9 +19,15 @@ steps:
     rocket build-cfn-params --app-name $(APP_NAME) --template-file cloudformation/config/params.template
 
   displayName: Build cloudformation params.json
+  env:
+    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+    AWS_SECRET_KEY_ID: $(AWS_SECRET_KEY_ID)
 
 - script: |
     rocket deploy-stack $(AWS_CLOUDFORMATION_STACK_NAME) --template-file cloudformation/s3-template.yaml --params-file cloudformation/config/params.json
 
   displayName: Deploy cloudformation stack
+  env:
+    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+    AWS_SECRET_KEY_ID: $(AWS_SECRET_KEY_ID)
 
