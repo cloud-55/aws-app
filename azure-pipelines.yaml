@@ -6,6 +6,7 @@ resources:
     image: cloud55/rocket:latest
 
 variables:
+  - group: AWS
   - name: AWS_CLOUDFORMATION_STACK_NAME
     value: my-app-stack
   - name: APP_NAME
