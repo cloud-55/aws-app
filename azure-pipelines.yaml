@@ -15,9 +15,6 @@ variables:
 container: rocket
 
 steps:
-- task: RocketBuildAndDeploy@0
-  inputs:
-    awsCredentials: 'cloud55'
 - script: |
     rocket build-cfn-params --app-name $(APP_NAME) --template-file cloudformation/config/params.template
 
